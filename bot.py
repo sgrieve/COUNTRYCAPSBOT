@@ -39,7 +39,8 @@ def create_tweet():
     Load a random lyric from the file, check its length and if it has been
     recently tweeted and return it in uppercase.
     '''
-    with open('LYRICS.txt', 'r') as f:
+    lyricpath = path.realpath(path.join(os.getcwd(), path.dirname(__file__)))
+    with open(path.join(lyricpath, 'LYRICS.txt'), 'r') as f:
         lyrics = f.readlines()
 
     Recent = GetRecentTweets()
@@ -59,7 +60,8 @@ def WriteRecent(tweet):
     Write the most recent tweet to a file, keeping the 5 most recent tweets.
     Adds tweet to front of file and pops the oldest recent tweet off the file.
     '''
-    with open('RECENT.txt', 'r') as f:
+    recentpath = path.realpath(path.join(os.getcwd(), path.dirname(__file__)))
+    with open(path.join(recentpath, 'RECENT.txt'), 'r') as f:
         recent = f.readlines()
 
     # if the list is longer than 4, remove the last entry and add the tweet
@@ -71,7 +73,7 @@ def WriteRecent(tweet):
         recent = [''] + recent[:]
         recent[0] = tweet
 
-    with open('RECENT.txt', 'w') as f:
+    with open(path.join(recentpath, 'RECENT.txt'), 'w') as f:
         for r in recent:
             f.write(r)
 
@@ -80,7 +82,8 @@ def GetRecentTweets():
     '''
     Load the most recent tweets from a file.
     '''
-    with open('RECENT.txt', 'r') as f:
+    recentpath = path.realpath(path.join(os.getcwd(), path.dirname(__file__)))
+    with open(path.join(recentpath, 'RECENT.txt'), 'r') as f:
         return f.readlines()
 
 
